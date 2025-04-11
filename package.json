@@ -15,7 +15,8 @@
     "minio": "^8.0.5",
     "next": "15.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-h5-audio-player": "^3.10.0-rc.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
