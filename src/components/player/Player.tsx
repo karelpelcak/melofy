@@ -29,7 +29,9 @@ export default function Player() {
                         <p>Now Playing: {currentSong?.title ?? "Nothing"}</p>
                     </div>
                     <div className="flex-grow flex justify-center">
-                        <audio ref={audioRef} controls />
+                        <audio ref={audioRef} controls >
+                            <source src={currentSong?.url} type="audio/mp3"/>
+                        </audio>
                     </div>
                     <div className="flex-shrink-0">
                         <input
