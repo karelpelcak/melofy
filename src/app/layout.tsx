@@ -1,3 +1,4 @@
+import Head from "next/head";
 import "./globals.css";
 import {AudioPlayerProvider} from "@/context/playerContext";
 
@@ -8,6 +9,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+    <Head>
+        <link rel="apple-touch-icon" href="/public/apple-touch-icon.png" />
+    </Head>
       <body
         className="max-w-screen max-h-screen bg-black text-white"
       >
