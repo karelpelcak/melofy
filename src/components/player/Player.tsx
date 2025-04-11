@@ -9,11 +9,18 @@ export default function Player() {
 
     useEffect(() => {
         if (currentSong && audioRef.current) {
-            audioRef.current.src = currentSong.url;
-            audioRef.current.play();
-            audioRef.current.volume = 0.3
+            const audio = audioRef.current;
+
+            audio.muted = true; // nutné pro autoplay na iOS
+            audio.src = currentSong.url;
+            audio.volume = 0.3;
+
+            audio.play().catch((err) => {
+                console.warn("Autoplay failed, čekám na uživatelskou interakci:", err);
+            });
         }
     }, [currentSong]);
+
 
     const changeVolume = (event: ChangeEvent<HTMLInputElement>) => {
         if (audioRef.current) {
@@ -29,8 +36,8 @@ export default function Player() {
                         <p>Now Playing: {currentSong?.title ?? "Nothing"}</p>
                     </div>
                     <div className="flex-grow flex justify-center">
-                        <audio ref={audioRef} controls >
-                            <source src={currentSong?.url} type="audio/mp3"/>
+                        <audio ref={audioRef}>
+                            <source src={currentSong?.url} type="audio/mp3" />
                         </audio>
                     </div>
                     <div className="flex-shrink-0">
