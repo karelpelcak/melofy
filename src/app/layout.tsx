@@ -8,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body
+        className="max-w-screen max-h-screen bg-black text-white"
+      >
       <AudioPlayerProvider>
           {children}
       </AudioPlayerProvider>

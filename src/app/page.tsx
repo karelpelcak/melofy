@@ -5,10 +5,6 @@ export default function Home() {
   return (
       <div>
           <SongList />
-          <br/>
-          <br/>
-          <br/>
-          <br/>
           <Player />
       </div>
   );

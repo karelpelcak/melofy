@@ -12,7 +12,7 @@ export default function SongItemClient({ song }: { song: Song }) {
     const { playSong } = useAudioPlayer();
 
     return (
-        <div onClick={() => playSong(song)} style={{ cursor: "pointer" }}>
+        <div onClick={() => playSong(song)} className="cursor-pointer p-1 border-2 border-gray-200">
             🎵 {song.title}
         </div>
     );
