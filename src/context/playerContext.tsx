@@ -7,13 +7,20 @@ type Song = {
     url: string;
 };
 
-const PlayerContext = createContext<any>(null);
+type AudioPlayerContextType = {
+    currentSong: Song | null;
+    setCurrentSong: (song: Song) => void;
+    audioRef: React.RefObject<HTMLAudioElement>;
+};
+
+const PlayerContext = createContext<AudioPlayerContextType | undefined>(undefined);
 
 export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     const [currentSong, setCurrentSong] = useState<Song | null>(null);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
 
     const playSong = (song: Song) => {
+        console.log("play song", song);
         setCurrentSong(song);
 
         setTimeout(() => {
@@ -34,4 +41,10 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export const useAudioPlayer = () => useContext(PlayerContext);
+export const useAudioPlayer = (): AudioPlayerContextType => {
+    const context = useContext(PlayerContext);
+    if (!context) {
+        throw new Error("useAudioPlayer must be used within an AudioPlayerProvider");
+    }
+    return context;
+};
