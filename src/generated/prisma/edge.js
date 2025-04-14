@@ -121,7 +121,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/karel.pelcak@saholding.sa.priv/WebstormProjects/melofy/src/generated/prisma",
+      "value": "C:\\Users\\KarelPelcak\\WebstormProjects\\v1\\melofy\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -130,12 +130,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/karel.pelcak@saholding.sa.priv/WebstormProjects/melofy/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\KarelPelcak\\WebstormProjects\\v1\\melofy\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

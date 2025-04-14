@@ -1,6 +1,6 @@
 import Head from "next/head";
 import "./globals.css";
-import {AudioPlayerProvider} from "@/context/playerContext";
+import {PlayerProvider} from "@/context/playerContext";
 
 export default function RootLayout({
   children,
@@ -15,9 +15,9 @@ export default function RootLayout({
       <body
         className="max-w-screen max-h-screen bg-black text-white"
       >
-      <AudioPlayerProvider>
+      <PlayerProvider>
           {children}
-      </AudioPlayerProvider>
+      </PlayerProvider>
       </body>
     </html>
   );

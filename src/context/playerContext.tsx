@@ -1,37 +1,37 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useRef, useState } from "react";
 
 type Song = {
     title: string;
     url: string;
 };
 
-type AudioContextType = {
-    currentSong: Song | null;
-    playSong: (song: Song) => void;
-};
+const PlayerContext = createContext<any>(null);
 
-const AudioPlayerContext = createContext<AudioContextType | undefined>(undefined);
-
-export const AudioPlayerProvider = ({ children }: { children: React.ReactNode }) => {
+export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     const [currentSong, setCurrentSong] = useState<Song | null>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const playSong = (song: Song) => {
         setCurrentSong(song);
+
+        setTimeout(() => {
+            if (audioRef.current) {
+                audioRef.current.load();
+                audioRef.current
+                    .play()
+                    .then(() => console.log("Playing!"))
+                    .catch((err) => console.error("Playback error:", err));
+            }
+        }, 0); // Timeout kvůli async re-renderu
     };
 
     return (
-        <AudioPlayerContext.Provider value={{ currentSong, playSong }}>
+        <PlayerContext.Provider value={{ currentSong, playSong, audioRef }}>
             {children}
-        </AudioPlayerContext.Provider>
+        </PlayerContext.Provider>
     );
 };
 
-export const useAudioPlayer = () => {
-    const context = useContext(AudioPlayerContext);
-    if (!context) {
-        throw new Error("useAudioPlayer must be used within an AudioPlayerProvider");
-    }
-    return context;
-};
+export const useAudioPlayer = () => useContext(PlayerContext);
