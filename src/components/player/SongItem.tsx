@@ -13,7 +13,7 @@ export default function SongItemClient({ song }: { song: Song }) {
 
     return (
         <div onClick={() => playSong(song)} className="cursor-pointer p-1 border-2 border-gray-200">
-            🎵 {song.title}
+            🎵 {song?.title}
         </div>
     );
 }
