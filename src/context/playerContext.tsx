@@ -10,7 +10,8 @@ type Song = {
 type AudioPlayerContextType = {
     currentSong: Song | null;
     setCurrentSong: (song: Song) => void;
-    audioRef: React.RefObject<HTMLAudioElement>;
+    playSong: (song: Song) => void;
+    audioRef: React.RefObject<HTMLAudioElement | undefined>;
 };
 
 const PlayerContext = createContext<AudioPlayerContextType | undefined>(undefined);
@@ -35,7 +36,7 @@ export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     return (
-        <PlayerContext.Provider value={{ currentSong, playSong, audioRef }}>
+        <PlayerContext.Provider value={{setCurrentSong, currentSong, playSong, audioRef }}>
             {children}
         </PlayerContext.Provider>
     );
