@@ -8,19 +8,11 @@ type Song = {
 };
 
 export default function SongItemClient({ song }: { song: Song }) {
-    const { audioRef, setCurrentSong } = useAudioPlayer();
-
-    const handleClick = () => {
-        if (audioRef.current) {
-            audioRef.current.src = song.url;
-            audioRef.current.play().catch(console.error); // ✅ přímá interakce
-        }
-        setCurrentSong(song);
-    };
+    const { playSong } = useAudioPlayer();
 
     return (
         <div
-            onClick={handleClick}
+            onClick={() => playSong(song)}
             className="cursor-pointer p-2 border-b border-gray-700 hover:bg-gray-800 transition"
         >
             🎵 {song.title}

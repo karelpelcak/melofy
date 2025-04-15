@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useRef, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type Song = {
     title: string;
@@ -9,34 +9,21 @@ type Song = {
 
 type AudioPlayerContextType = {
     currentSong: Song | null;
-    setCurrentSong: (song: Song) => void;
     playSong: (song: Song) => void;
-    audioRef: React.RefObject<HTMLAudioElement | null>;
 };
 
 const PlayerContext = createContext<AudioPlayerContextType | undefined>(undefined);
 
 export const PlayerProvider = ({ children }: { children: React.ReactNode }) => {
     const [currentSong, setCurrentSong] = useState<Song | null>(null);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     const playSong = (song: Song) => {
         console.log("play song", song);
         setCurrentSong(song);
-
-        setTimeout(() => {
-            if (audioRef.current) {
-                audioRef.current.load();
-                audioRef.current
-                    .play()
-                    .then(() => console.log("Playing!"))
-                    .catch((err) => console.error("Playback error:", err));
-            }
-        }, 0); // Timeout kvůli async re-renderu
     };
 
     return (
-        <PlayerContext.Provider value={{setCurrentSong, currentSong, playSong, audioRef }}>
+        <PlayerContext.Provider value={{playSong, currentSong }}>
             {children}
         </PlayerContext.Provider>
     );
